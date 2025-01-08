@@ -2,19 +2,10 @@ package pl.smart4aviation;
 
 public class SegmentTree {
 
-  private final int[] segmentTree;
-  private final int n;
-
-  public SegmentTree(int n) {
-    this.segmentTree = new int[4 * n];
-    this.n = n;
-  }
-
   public static class STNode {
     private int leftIndex;
     private int rightIndex;
     private int sum;
-    private boolean isActive = true;
     private STNode leftNode;
     private STNode rightNode;
   }
@@ -41,10 +32,6 @@ public class SegmentTree {
   }
 
   public static int getSum(STNode parent, int leftIdx, int rightIdx) {
-
-    if (!parent.isActive) {
-      return 0;
-    }
     if (parent.leftIndex >= leftIdx && parent.rightIndex <= rightIdx) {
       return parent.sum;
     }
@@ -61,7 +48,6 @@ public class SegmentTree {
     if (parent.leftIndex == parent.rightIndex && index == parent.leftIndex) {
       diff = value - parent.sum;
       parent.sum = value;
-      parent.isActive = value != 0;
       return diff;
     }
 
