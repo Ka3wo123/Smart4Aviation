@@ -1,17 +1,22 @@
-package pl.smart4aviation;
+package pl.smart4aviation.utils;
 
 import lombok.Getter;
+import pl.smart4aviation.models.Plane;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class SegmentTree {
-  @Getter private int[] TREE;
+  @Getter private final List<Plane> TREE;
   private final int START_INDEX = 0;
   private final int END_INDEX;
   private final int CURRENT_INDEX = 0;
 
-  public SegmentTree(int[] array) {
-    int size = array.length;
+  public SegmentTree(List<Plane> array) {
+    int size = array.size();
     int maxSize = 2 * size - 1;
-    TREE = new int[maxSize];
+    TREE = new ArrayList<>(Collections.nCopies(maxSize, new Plane(0)));
     END_INDEX = size - 1;
     constructTreeUtil(array, START_INDEX, END_INDEX, CURRENT_INDEX);
   }
@@ -20,21 +25,27 @@ public class SegmentTree {
     return getSumUtil(START_INDEX, END_INDEX, queryStart - 1, queryEnd - 1, CURRENT_INDEX);
   }
 
-  public void updateValue(int[] array, int updateIndex, int newValue) {
-    int diff = newValue - array[updateIndex - 1];
+  public void updateValue(List<Plane> list, int updateIndex, int newValue) {
+    Plane planeToUpdate = list.get(updateIndex - 1);
+    int diff = newValue - planeToUpdate.getMaxPassengers();
+
     if (newValue == 0) {
-      array[updateIndex - 1] = 0;
+      planeToUpdate.setActive(false);
     } else {
-      array[updateIndex - 1] = diff;
+      planeToUpdate.setMaxPassengers(newValue);
     }
 
     updateValueUtil(START_INDEX, END_INDEX, updateIndex - 1, diff, CURRENT_INDEX);
+    list.get(updateIndex - 1).setMaxPassengers(newValue);
   }
 
   private void updateValueUtil(
       int startIndex, int endIndex, int updateIndex, int diff, int currentIndex) {
     if (updateIndex < startIndex || updateIndex > endIndex) return;
-    TREE[currentIndex] = TREE[currentIndex] + diff;
+
+    int maxPassengers = TREE.get(currentIndex).getMaxPassengers();
+    TREE.get(currentIndex).setMaxPassengers(maxPassengers + diff);
+
     if (startIndex != endIndex) {
       int mid = getMid(startIndex, endIndex);
       updateValueUtil(startIndex, mid, updateIndex, diff, 2 * currentIndex + 1);
@@ -44,8 +55,9 @@ public class SegmentTree {
 
   private int getSumUtil(
       int startIndex, int endIndex, int queryStart, int queryEnd, int currentIndex) {
-    if (queryStart <= startIndex && queryEnd >= endIndex) {
-      return TREE[currentIndex];
+    Plane plane = TREE.get(currentIndex);
+    if (queryStart <= startIndex && queryEnd >= endIndex && plane.isActive()) {
+      return plane.getMaxPassengers();
     }
 
     if (endIndex < queryStart || startIndex > queryEnd) {
@@ -58,17 +70,22 @@ public class SegmentTree {
         + getSumUtil(mid + 1, endIndex, queryStart, queryEnd, 2 * currentIndex + 2);
   }
 
-  private int constructTreeUtil(int[] array, int startIndex, int endIndex, int currentIndex) {
+  private int constructTreeUtil(List<Plane> list, int startIndex, int endIndex, int currentIndex) {
     if (startIndex == endIndex) {
-      TREE[currentIndex] = array[startIndex];
-      return array[startIndex];
+      Plane plane = list.get(startIndex);
+      TREE.set(currentIndex, plane);
+      return plane.getMaxPassengers();
     }
 
     int mid = getMid(startIndex, endIndex);
-    TREE[currentIndex] =
-        constructTreeUtil(array, startIndex, mid, 2 * currentIndex + 1)
-            + constructTreeUtil(array, mid + 1, endIndex, 2 * currentIndex + 2);
-    return TREE[currentIndex];
+    Plane parent = new Plane(0);
+    int leftSum = constructTreeUtil(list, startIndex, mid, 2 * currentIndex + 1);
+    int rightSum = constructTreeUtil(list, mid + 1, endIndex, 2 * currentIndex + 2);
+
+    parent.setMaxPassengers(leftSum + rightSum);
+    TREE.set(currentIndex, parent);
+
+    return parent.getMaxPassengers();
   }
 
   private int getMid(int startIndex, int endIndex) {

@@ -1,4 +1,4 @@
-package pl.smart4aviation;
+package pl.smart4aviation.exceptions;
 
 public class ImproperNumberException extends RuntimeException {
   public ImproperNumberException(String message) {
