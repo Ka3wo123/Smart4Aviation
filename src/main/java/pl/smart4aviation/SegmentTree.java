@@ -1,64 +1,77 @@
 package pl.smart4aviation;
 
+import lombok.Getter;
+
 public class SegmentTree {
+  @Getter private int[] TREE;
+  private final int START_INDEX = 0;
+  private final int END_INDEX;
+  private final int CURRENT_INDEX = 0;
 
-  public static class STNode {
-    private int leftIndex;
-    private int rightIndex;
-    private int sum;
-    private STNode leftNode;
-    private STNode rightNode;
+  public SegmentTree(int[] array) {
+    int size = array.length;
+    int maxSize = 2 * size - 1;
+    TREE = new int[maxSize];
+    END_INDEX = size - 1;
+    constructTreeUtil(array, START_INDEX, END_INDEX, CURRENT_INDEX);
   }
 
-  public static STNode construct(int[] arr, int start, int end) {
-    if (start == end) {
-      STNode node = new STNode();
-      node.leftIndex = start;
-      node.rightIndex = end;
-      node.sum = arr[start];
-      return node;
-    }
-
-    int mid = (start + end) / 2;
-    STNode leftNode = construct(arr, start, mid);
-    STNode rightNode = construct(arr, mid + 1, end);
-    STNode parent = new STNode();
-    parent.leftIndex = leftNode.leftIndex;
-    parent.rightIndex = rightNode.rightIndex;
-    parent.sum = leftNode.sum + rightNode.sum;
-    parent.leftNode = leftNode;
-    parent.rightNode = rightNode;
-    return parent;
+  public int getSum(int queryStart, int queryEnd) {
+    return getSumUtil(START_INDEX, END_INDEX, queryStart - 1, queryEnd - 1, CURRENT_INDEX);
   }
 
-  public static int getSum(STNode parent, int leftIdx, int rightIdx) {
-    if (parent.leftIndex >= leftIdx && parent.rightIndex <= rightIdx) {
-      return parent.sum;
+  public void updateValue(int[] array, int updateIndex, int newValue) {
+    int diff = newValue - array[updateIndex - 1];
+    if (newValue == 0) {
+      array[updateIndex - 1] = 0;
+    } else {
+      array[updateIndex - 1] = diff;
     }
 
-    if (parent.rightIndex < leftIdx || parent.leftIndex > rightIdx) {
+    updateValueUtil(START_INDEX, END_INDEX, updateIndex - 1, diff, CURRENT_INDEX);
+  }
+
+  private void updateValueUtil(
+      int startIndex, int endIndex, int updateIndex, int diff, int currentIndex) {
+    if (updateIndex < startIndex || updateIndex > endIndex) return;
+    TREE[currentIndex] = TREE[currentIndex] + diff;
+    if (startIndex != endIndex) {
+      int mid = getMid(startIndex, endIndex);
+      updateValueUtil(startIndex, mid, updateIndex, diff, 2 * currentIndex + 1);
+      updateValueUtil(mid + 1, endIndex, updateIndex, diff, 2 * currentIndex + 2);
+    }
+  }
+
+  private int getSumUtil(
+      int startIndex, int endIndex, int queryStart, int queryEnd, int currentIndex) {
+    if (queryStart <= startIndex && queryEnd >= endIndex) {
+      return TREE[currentIndex];
+    }
+
+    if (endIndex < queryStart || startIndex > queryEnd) {
       return 0;
     }
 
-    return getSum(parent.leftNode, leftIdx, rightIdx) + getSum(parent.rightNode, leftIdx, rightIdx);
+    int mid = getMid(startIndex, endIndex);
+
+    return getSumUtil(startIndex, mid, queryStart, queryEnd, 2 * currentIndex + 1)
+        + getSumUtil(mid + 1, endIndex, queryStart, queryEnd, 2 * currentIndex + 2);
   }
 
-  public static int update(STNode parent, int index, int value) {
-    int diff;
-    if (parent.leftIndex == parent.rightIndex && index == parent.leftIndex) {
-      diff = value - parent.sum;
-      parent.sum = value;
-      return diff;
+  private int constructTreeUtil(int[] array, int startIndex, int endIndex, int currentIndex) {
+    if (startIndex == endIndex) {
+      TREE[currentIndex] = array[startIndex];
+      return array[startIndex];
     }
 
-    int mid = (parent.leftIndex + parent.rightIndex) / 2;
-    if (index <= mid) {
-      diff = update(parent.leftNode, index, value);
-    } else {
-      diff = update(parent.rightNode, index, value);
-    }
+    int mid = getMid(startIndex, endIndex);
+    TREE[currentIndex] =
+        constructTreeUtil(array, startIndex, mid, 2 * currentIndex + 1)
+            + constructTreeUtil(array, mid + 1, endIndex, 2 * currentIndex + 2);
+    return TREE[currentIndex];
+  }
 
-    parent.sum += diff;
-    return diff;
+  private int getMid(int startIndex, int endIndex) {
+    return startIndex + (endIndex - startIndex) / 2;
   }
 }
