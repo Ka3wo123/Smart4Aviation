@@ -2,7 +2,7 @@ import pl.smart4aviation.model.Plane
 import pl.smart4aviation.util.SegmentTree
 import spock.lang.Specification
 
-class RouteOperationsSpec extends Specification {
+class FlightOperationsSpec extends Specification {
     def "example 1: validate operations for 5 planes and 7 queries"() {
         given: "list of planes and segment tree"
         def planes = [
@@ -26,7 +26,7 @@ class RouteOperationsSpec extends Specification {
         segmentTree.updateValue(planes, 2, 5, days[3])
 
         then:
-        segmentTree.getSum(planes, 1, 5, days[4]) == 97
+        segmentTree.getSum(planes, 1, 5, days[4]) == 97 // no matter how I receive 97 as correct result
     }
 
     def "example 2: validate operations for 1 plane and 7 queries"() {
@@ -42,8 +42,8 @@ class RouteOperationsSpec extends Specification {
         segmentTree.updateValue(planes, 1, 0, days[0])
         segmentTree.updateValue(planes, 1, 6, days[1])
 
-        then: "calculating sums since 1st day till specified inclusively (withdrawn planes' max seats are excluded)"
-        segmentTree.getSum(planes, 1, 1, days[2]) == 12
+        then: "calculating sums since 1st day till specified day inclusively (withdrawn planes' max seats are omitted)"
+        segmentTree.getSum(planes, 1, 1, days[2]) == 12 //for me it should be 12 because on previous day we assigned new plane
         segmentTree.getSum(planes, 1, 1, days[3]) == 18
         segmentTree.getSum(planes, 1, 1, days[4]) == 36
         segmentTree.getSum(planes, 1, 1, days[5]) == 42

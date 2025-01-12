@@ -27,7 +27,7 @@ public class Runner {
       n = Integer.parseInt(initParams[0]);
       q = Integer.parseInt(initParams[1]);
 
-      System.out.printf("Provide %d numbers of max passengers%n", n);
+      System.out.printf("Provide %d numbers representing max passenger seats\n", n);
       String[] maxPassengersArr = reader.readLine().split("\\s+");
 
       checkGivenInput(maxPassengersArr, n);

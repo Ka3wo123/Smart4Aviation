@@ -34,5 +34,5 @@ For the list: `[1, 2, 3, 4]` corresponding Segment Tree will look like `[10, 3, 
    [1]   [2] [3]  [4]  <-- Leaf nodes (elements in original list)
 ```
 ### 🔬 Testing
-Unit tests are written in Groovy using Spock framework. The [**SegmentTreeSpec**](src/test/groovy/SegmentTreeSpec.groovy) file is concerned with testing SegmentTree operations like calculating sum and updating value, whereas the [**RouteOperationsSpec**](src/test/groovy/RouteOperationsSpec.groovy) file contains two test for examples given in task. \
+Unit tests are written in Groovy using Spock framework. The [**SegmentTreeSpec**](src/test/groovy/SegmentTreeSpec.groovy) file is concerned with testing SegmentTree operations like calculating sum and updating value, whereas the [**FlightOperationsSpec**](src/test/groovy/FlightOperationsSpec.groovy) file contains two test for examples given in task. \
 Run `./gradlew test` in the root folder.

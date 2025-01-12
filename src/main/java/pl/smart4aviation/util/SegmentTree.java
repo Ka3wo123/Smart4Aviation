@@ -63,7 +63,6 @@ public class SegmentTree {
       }
     } else {
       historyRoutes.get(day - 1).get(updateIndex - 1).setMaxPassengers(newValue);
-
     }
 
     System.out.println("----");
@@ -136,7 +135,7 @@ public class SegmentTree {
 
   private void fillHistoryRoutes(List<Plane> list, int day) {
     while (historyRoutes.size() < day) {
-      List<Plane> route = list.stream().map(plane -> new Plane(plane.getMaxPassengers())).toList();
+      List<Plane> route = list.stream().map(plane -> new Plane(plane.getMaxPassengers(), plane.isActive())).toList();
       historyRoutes.add(route);
     }
   }
