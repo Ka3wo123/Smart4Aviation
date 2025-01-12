@@ -5,20 +5,23 @@ The **S4A Airlines Application** is designed to manage the operations of an airl
 - withdrawing planes - planes can be withdrawn from flight on since specified day,
 - assigning/changing new aircraft max seat amount - new amount of aircraft seats can be set for withdrawn airplane or this number can be changed for particular day.
 
-
- 
-### Launching application
+### ✈️ Launching application
 Application entry point is located in `main` method in [**S4AAirlinesApplication**](src/main/java/pl/smart4aviation/S4AAirlinesApplication.java) file. \
 Run `./gradlew run` in the root folder.
 
-### Exceptions handling
-If an invalid number of parameters are provided then `ImproperNumberException` is thrown. \
+### ❗Exceptions handling
+If an invalid number of parameters are provided then `ImproperNumberException` is thrown.
+```shell
+> Q 1
+> java.lang.ImproperNumberException: Expected 2 numbers ('n' and 'q') but got 1
+```
 If picked invalid operation then `UnsupportedOperationException` is thrown.
+```shell
+> V 1 2
+> java.lang.UnsupportedOperationException: No such operation: V. Select `Q`, `C`, `P` or `A`.
+```
 
-
-
-
-### Segment Tree data structure
+### 🧮 Segment Tree data structure
 A Segment Tree allows efficient querying and updating segments in lists or arrays in **O(log(n))** time both for range queries and single updates. \
 In this case, it constructs Segment Tree based on the passed `ArrayList` which represents initial data. Segment Tree itself is stored as a `List` where each element holds a sum for specific segment of the original data. \
 For the list: `[1, 2, 3, 4]` corresponding Segment Tree will look like `[10, 3, 7, 1, 2, 3, 4]`. It is a Binary Tree so left child of parent is at index `2*idx+1` and right child at index `2*idx+2`.
