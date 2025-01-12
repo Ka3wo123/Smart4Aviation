@@ -6,7 +6,6 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @ToString
-@Builder(toBuilder = true)
 public class Plane {
     private int maxPassengers;
     private boolean isActive;

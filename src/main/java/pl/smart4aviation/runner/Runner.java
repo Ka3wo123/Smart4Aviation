@@ -40,7 +40,6 @@ public class Runner {
       SegmentTree segmentTree = new SegmentTree(planeList);
 
       for (int i = 0; i < q; i++) {
-        System.out.println("Pick operation `Q`, `P`, `C`, `A`");
         String[] query = reader.readLine().split("\\s+");
 
         String operationType = query[0];

@@ -14,7 +14,6 @@ public class QueryOperation implements Operation {
     int day = Integer.parseInt(query[3]);
 
     int sum = segmentTree.getSum(iRoute, jRoute);
-    System.out.println(planeList);
 
     sum *= day;
 
