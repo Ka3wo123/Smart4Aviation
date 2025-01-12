@@ -1,9 +1,9 @@
-package pl.smart4aviation.factories;
+package pl.smart4aviation.factory;
 
-import pl.smart4aviation.factories.concreteoperations.AssignOperation;
-import pl.smart4aviation.factories.concreteoperations.CancelOperation;
-import pl.smart4aviation.factories.concreteoperations.QueryOperation;
-import pl.smart4aviation.factories.concreteoperations.UpdateOperation;
+import pl.smart4aviation.factory.concreteoperation.AssignOperation;
+import pl.smart4aviation.factory.concreteoperation.CancelOperation;
+import pl.smart4aviation.factory.concreteoperation.QueryOperation;
+import pl.smart4aviation.factory.concreteoperation.UpdateOperation;
 
 public class OperationFactory {
   public static Operation getOperation(String type) {

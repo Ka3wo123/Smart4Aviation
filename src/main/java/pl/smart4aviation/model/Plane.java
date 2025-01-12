@@ -1,4 +1,4 @@
-package pl.smart4aviation.models;
+package pl.smart4aviation.model;
 
 import lombok.*;
 

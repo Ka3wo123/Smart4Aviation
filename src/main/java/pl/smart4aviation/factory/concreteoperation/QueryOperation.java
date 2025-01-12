@@ -1,7 +1,7 @@
-package pl.smart4aviation.factories.concreteoperations;
+package pl.smart4aviation.factory.concreteoperation;
 
-import pl.smart4aviation.factories.Operation;
-import pl.smart4aviation.models.Plane;
+import pl.smart4aviation.factory.Operation;
+import pl.smart4aviation.model.Plane;
 import pl.smart4aviation.utils.SegmentTree;
 
 import java.util.List;
@@ -13,8 +13,9 @@ public class QueryOperation implements Operation {
     int jRoute = Integer.parseInt(query[2]);
     int day = Integer.parseInt(query[3]);
 
-    System.out.println(planeList);
     int sum = segmentTree.getSum(iRoute, jRoute);
+
+    sum *= day;
 
     System.out.println(sum);
   }

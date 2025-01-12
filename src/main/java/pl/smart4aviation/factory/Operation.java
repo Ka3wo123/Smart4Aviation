@@ -1,6 +1,6 @@
-package pl.smart4aviation.factories;
+package pl.smart4aviation.factory;
 
-import pl.smart4aviation.models.Plane;
+import pl.smart4aviation.model.Plane;
 import pl.smart4aviation.utils.SegmentTree;
 
 import java.util.List;

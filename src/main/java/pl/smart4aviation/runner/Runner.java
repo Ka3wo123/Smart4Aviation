@@ -1,9 +1,9 @@
-package pl.smart4aviation.startup;
+package pl.smart4aviation.runner;
 
-import pl.smart4aviation.exceptions.ImproperNumberException;
-import pl.smart4aviation.factories.Operation;
-import pl.smart4aviation.factories.OperationFactory;
-import pl.smart4aviation.models.Plane;
+import pl.smart4aviation.exception.ImproperNumberException;
+import pl.smart4aviation.factory.Operation;
+import pl.smart4aviation.factory.OperationFactory;
+import pl.smart4aviation.model.Plane;
 import pl.smart4aviation.utils.SegmentTree;
 
 import java.io.BufferedReader;
@@ -11,8 +11,8 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 
-public class Startup {
-  public static void start() {
+public class Runner {
+  public static void run() {
 
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     int n;

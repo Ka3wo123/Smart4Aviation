@@ -1,7 +1,7 @@
 package pl.smart4aviation.utils;
 
 import lombok.Getter;
-import pl.smart4aviation.models.Plane;
+import pl.smart4aviation.model.Plane;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,7 +60,7 @@ public class SegmentTree {
       return plane.getMaxPassengers();
     }
 
-    if (endIndex < queryStart || startIndex > queryEnd) {
+    if (endIndex < queryStart || startIndex > queryEnd || !plane.isActive()) {
       return 0;
     }
 
