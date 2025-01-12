@@ -12,6 +12,7 @@ public class CancelOperation implements Operation {
     int iRoute = Integer.parseInt(query[1]);
     int day = Integer.parseInt(query[2]);
 
+    segmentTree.updateValue(planeList, iRoute, 0);
     planeList.get(iRoute - 1).setActive(false);
   }
 }

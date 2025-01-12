@@ -29,11 +29,7 @@ public class SegmentTree {
     Plane planeToUpdate = list.get(updateIndex - 1);
     int diff = newValue - planeToUpdate.getMaxPassengers();
 
-    if (newValue == 0) {
-      planeToUpdate.setActive(false);
-    } else {
-      planeToUpdate.setMaxPassengers(newValue);
-    }
+    planeToUpdate.setMaxPassengers(newValue);
 
     updateValueUtil(START_INDEX, END_INDEX, updateIndex - 1, diff, CURRENT_INDEX);
     list.get(updateIndex - 1).setMaxPassengers(newValue);
