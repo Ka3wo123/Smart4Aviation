@@ -1,5 +1,5 @@
 import pl.smart4aviation.model.Plane
-import pl.smart4aviation.utils.SegmentTree
+import pl.smart4aviation.util.SegmentTree
 import spock.lang.Specification
 import spock.lang.Unroll
 

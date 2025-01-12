@@ -1,4 +1,4 @@
-package pl.smart4aviation.utils;
+package pl.smart4aviation.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,6 +6,8 @@ import java.util.List;
 import pl.smart4aviation.model.Plane;
 
 public class SegmentTree {
+  private final List<List<Plane>> historyRoutes;
+  private final List<Plane> currentRoutes;
   private final List<Plane> TREE;
   private final int START_INDEX = 0;
   private final int END_INDEX;
@@ -14,6 +16,8 @@ public class SegmentTree {
   public SegmentTree(List<Plane> array) {
     int size = array.size();
     int maxSize = 2 * size - 1;
+    historyRoutes = new ArrayList<>();
+    currentRoutes = new ArrayList<>(array);
     TREE = new ArrayList<>(Collections.nCopies(maxSize, new Plane(0)));
     END_INDEX = size - 1;
     constructTreeUtil(array, START_INDEX, END_INDEX, CURRENT_INDEX);

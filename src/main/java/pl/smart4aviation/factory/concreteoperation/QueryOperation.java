@@ -2,7 +2,7 @@ package pl.smart4aviation.factory.concreteoperation;
 
 import pl.smart4aviation.factory.Operation;
 import pl.smart4aviation.model.Plane;
-import pl.smart4aviation.utils.SegmentTree;
+import pl.smart4aviation.util.SegmentTree;
 
 import java.util.List;
 
@@ -20,10 +20,3 @@ public class QueryOperation implements Operation {
     System.out.println(sum);
   }
 }
-
-/*
-[1,2,3,2,4]
-[1,2,3,2,4]
-[1,0,5,2,4]
-[1,0,3,2,4]
- */

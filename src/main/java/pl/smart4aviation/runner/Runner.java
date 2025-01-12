@@ -4,7 +4,7 @@ import pl.smart4aviation.exception.ImproperNumberException;
 import pl.smart4aviation.factory.Operation;
 import pl.smart4aviation.factory.OperationFactory;
 import pl.smart4aviation.model.Plane;
-import pl.smart4aviation.utils.SegmentTree;
+import pl.smart4aviation.util.SegmentTree;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
