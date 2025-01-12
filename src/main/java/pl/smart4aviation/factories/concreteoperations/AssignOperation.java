@@ -1,11 +1,12 @@
-package pl.smart4aviation.factories;
+package pl.smart4aviation.factories.concreteoperations;
 
+import pl.smart4aviation.factories.Operation;
 import pl.smart4aviation.models.Plane;
 import pl.smart4aviation.utils.SegmentTree;
 
 import java.util.List;
 
-public class AssignOperation implements Operation{
+public class AssignOperation implements Operation {
     @Override
     public void execute(SegmentTree segmentTree, List<Plane> planeList, String... query) {
         int iRoute = Integer.parseInt(query[1]);

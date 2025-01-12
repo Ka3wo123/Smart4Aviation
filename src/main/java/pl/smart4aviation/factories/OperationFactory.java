@@ -1,5 +1,10 @@
 package pl.smart4aviation.factories;
 
+import pl.smart4aviation.factories.concreteoperations.AssignOperation;
+import pl.smart4aviation.factories.concreteoperations.CancelOperation;
+import pl.smart4aviation.factories.concreteoperations.QueryOperation;
+import pl.smart4aviation.factories.concreteoperations.UpdateOperation;
+
 public class OperationFactory {
   public static Operation getOperation(String type) {
     return switch (type) {

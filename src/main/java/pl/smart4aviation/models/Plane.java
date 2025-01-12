@@ -1,14 +1,12 @@
 package pl.smart4aviation.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @ToString
+@Builder(toBuilder = true)
 public class Plane {
     private int maxPassengers;
     private boolean isActive;

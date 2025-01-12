@@ -1,5 +1,6 @@
-package pl.smart4aviation.factories;
+package pl.smart4aviation.factories.concreteoperations;
 
+import pl.smart4aviation.factories.Operation;
 import pl.smart4aviation.models.Plane;
 import pl.smart4aviation.utils.SegmentTree;
 
