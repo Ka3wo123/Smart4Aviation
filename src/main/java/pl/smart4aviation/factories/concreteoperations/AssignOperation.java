@@ -15,6 +15,7 @@ public class AssignOperation implements Operation {
 
         if(!planeList.get(iRoute - 1).isActive()) {
             segmentTree.updateValue(planeList, iRoute, newMaxPassengers);
+            planeList.get(iRoute - 1).setActive(true);
         } else {
             throw new RuntimeException("Cannot assign active plane to new route");
         }
