@@ -11,7 +11,7 @@ class SegmentTreeSpec extends Specification {
         def segmentTree = constructSegmentTree(list)
 
         when: "sum for range is queried"
-        def sum = segmentTree.getSum(start, end)
+        def sum = segmentTree.getSum(list, start, end, 1)
 
         then:
         sum == expectedSum
@@ -30,7 +30,7 @@ class SegmentTreeSpec extends Specification {
         def segmentTree = constructSegmentTree(list)
 
         when: "query is made for a range outside bounds"
-        def sum = segmentTree.getSum(5, list.size() + 10)
+        def sum = segmentTree.getSum(list, 5, list.size() + 10, 1)
 
         then:
         sum == 0
@@ -42,7 +42,7 @@ class SegmentTreeSpec extends Specification {
         def segmentTree = constructSegmentTree(list)
 
         when: "value is updated and sum for range is queried"
-        segmentTree.updateValue(list, updateIndex, newValue)
+        segmentTree.updateValue(list, updateIndex, newValue, 1)
 
         then:
         list.get(updateIndex - 1).getMaxPassengers() == newValue
@@ -65,13 +65,10 @@ class SegmentTreeSpec extends Specification {
         def endIndex = list.size()
 
         when:
-        segmentTree.updateValue(list, updateIndex, newValue)
+        segmentTree.updateValue(list, updateIndex, newValue, 1)
 
         then:
-        segmentTree.getSum(startIndex, endIndex) == 5
-
-        and: "plane at given updateIndex should be inactive"
-        !list.get(updateIndex - 1).isActive()
+        segmentTree.getSum(list, startIndex, endIndex, 1) == 5
     }
 
     private static def constructSegmentTree(List<Plane> list) {

@@ -14,7 +14,7 @@ public class UpdateOperation implements Operation {
     int day = Integer.parseInt(query[3]);
 
     if(planeList.get(iRoute - 1).isActive()) {
-        segmentTree.updateValue(planeList, iRoute, newMaxPassengers);
+        segmentTree.updateValue(planeList, iRoute, newMaxPassengers, day);
     } else {
         throw new RuntimeException("Cannot update max passengers number because this plane is inactive");
     }

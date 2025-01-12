@@ -14,7 +14,7 @@ public class AssignOperation implements Operation {
         int day = Integer.parseInt(query[3]);
 
         if(!planeList.get(iRoute - 1).isActive()) {
-            segmentTree.updateValue(planeList, iRoute, newMaxPassengers);
+            segmentTree.updateValue(planeList, iRoute, newMaxPassengers, day);
             planeList.get(iRoute - 1).setActive(true);
         } else {
             throw new RuntimeException("Cannot assign active plane to new route");
