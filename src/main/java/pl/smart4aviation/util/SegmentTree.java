@@ -26,13 +26,6 @@ public class SegmentTree {
 
     fillHistoryRoutes(list, day);
 
-    for (List<Plane> historyRoute : historyRoutes) {
-      for (Plane plane : historyRoute) {
-        System.out.print(plane.getMaxPassengers() + " ");
-      }
-      System.out.println();
-    }
-
     for (int i = 0; i < historyRoutes.size(); i++) {
       List<Plane> planeList = historyRoutes.get(day - i - 1);
       SegmentTree segmentTree = new SegmentTree(planeList);
@@ -63,14 +56,6 @@ public class SegmentTree {
       }
     } else {
       historyRoutes.get(day - 1).get(updateIndex - 1).setMaxPassengers(newValue);
-    }
-
-    System.out.println("----");
-    for (List<Plane> historyRoute : historyRoutes) {
-      for (Plane plane : historyRoute) {
-        System.out.print(plane.getMaxPassengers() + " ");
-      }
-      System.out.println();
     }
   }
 
