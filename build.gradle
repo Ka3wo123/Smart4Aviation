@@ -27,7 +27,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
-//mainClassName = 'pl.smart4aviation.S4AAirlinesApplication'
+mainClassName = 'pl.smart4aviation.S4AAirlinesApplication'
 
 test {
     useJUnitPlatform()
