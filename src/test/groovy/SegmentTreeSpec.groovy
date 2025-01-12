@@ -72,7 +72,6 @@ class SegmentTreeSpec extends Specification {
 
         and: "plane at given updateIndex should be inactive"
         !list.get(updateIndex - 1).isActive()
-
     }
 
     private static def constructSegmentTree(List<Plane> list) {
