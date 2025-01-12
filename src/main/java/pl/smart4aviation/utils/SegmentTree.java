@@ -1,14 +1,12 @@
 package pl.smart4aviation.utils;
 
-import lombok.Getter;
-import pl.smart4aviation.model.Plane;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import pl.smart4aviation.model.Plane;
 
 public class SegmentTree {
-  @Getter private final List<Plane> TREE;
+  private final List<Plane> TREE;
   private final int START_INDEX = 0;
   private final int END_INDEX;
   private final int CURRENT_INDEX = 0;

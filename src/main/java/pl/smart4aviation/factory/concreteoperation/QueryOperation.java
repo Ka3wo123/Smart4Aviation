@@ -20,3 +20,10 @@ public class QueryOperation implements Operation {
     System.out.println(sum);
   }
 }
+
+/*
+[1,2,3,2,4]
+[1,2,3,2,4]
+[1,0,5,2,4]
+[1,0,3,2,4]
+ */
